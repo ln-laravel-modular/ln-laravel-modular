@@ -12,7 +12,7 @@
 */
 
 $app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+  $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
 /*
@@ -27,20 +27,24 @@ $app = new Illuminate\Foundation\Application(
 */
 
 $app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
+  Illuminate\Contracts\Http\Kernel::class,
+  App\Http\Kernel::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
+  Illuminate\Contracts\Console\Kernel::class,
+  App\Console\Kernel::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+  Illuminate\Contracts\Debug\ExceptionHandler::class,
+  App\Exceptions\Handler::class
 );
 
+// 引入自定义全局函数
+require __DIR__ . '/helpers.php';
+// 引入自定义模块函数
+require __DIR__ . '/../modules/helpers.php';
 /*
 |--------------------------------------------------------------------------
 | Return The Application

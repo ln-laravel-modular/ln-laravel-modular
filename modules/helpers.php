@@ -5,12 +5,8 @@
  */
 
 use Illuminate\Support\Arr;
-use PhpOption\Option;
-use Illuminate\Console\Command;
-use Illuminate\Console\OutputStyle;
-use Illuminate\Filesystem\Filesystem;
-use ZanySoft\Zip\Zip;
 use Illuminate\Support\Facades\File;
+
 
 /**
  * 获取模块的配置参数
@@ -27,6 +23,21 @@ if (!function_exists('module')) {
   {
   }
 }
+if (!function_exists('modules')) {
+  /**
+   * Undocumented function
+   *
+   * @param [type] $key
+   * @param [type] $default
+   * @return void
+   */
+  function modules($key, $default = null)
+  {
+  }
+}
+
+
+
 if (!function_exists('module_path')) {
   /**
    * 获取模块地址
