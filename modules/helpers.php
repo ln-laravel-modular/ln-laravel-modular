@@ -77,7 +77,7 @@ if (!function_exists('module_path')) {
   }
 }
 if (!function_exists('module_env')) {
-  function module_env($key)
+  function module_env($key = null)
   {
     $backtrace =  debug_backtrace();
     $file_path = $backtrace[0]['file'];
@@ -88,17 +88,32 @@ if (!function_exists('module_env')) {
       return null;
     } else {
       $env = file_get_contents((string)$env_path);
-      $env = Arr::first(array_filter(explode("\n", $env)), function ($value) use ($key) {
-        return in_array(substr(trim($value), 0, strlen($key) + 1), [$key . " ", $key . "="]);
-      });
-      $env = explode("=", $env);
-      return trim($env[1]);
+      if (empty($key)) {
+        return parse_ini_string($env, true);
+      } else {
+        $env = Arr::first(array_filter(explode("\n", $env)), function ($value) use ($key) {
+          return in_array(substr(trim($value), 0, strlen($key) + 1), [$key . " ", $key . "="]);
+        });
+        $env = explode("=", $env);
+        return trim($env[1]);
+      }
     }
     return $backtrace;
   }
 }
 if (!function_exists('module_config')) {
-  function module_config($key)
+  function module_config($key = null, $file = null)
   {
+    $backtrace =  debug_backtrace();
+    $file_path = $backtrace[0]['file'];
+    $file_path = substr($file_path, strlen(base_path('modules')) + 1);
+    $module_dir = substr($file_path, 0, strpos($file_path, '\\'));
+    if (empty($key)) $key = $module_dir;
+    $config_path = module_path($module_dir . '/config/' . $key . '.php');
+    if (!File::exists($config_path)) {
+      return null;
+    } else {
+      return require $config_path;
+    }
   }
 }

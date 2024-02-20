@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix(module_env('ROUTE_PREFIX'))->group(function () {
+  $module = [
+    'module_env' => module_env(),
+    'module_config' => module_config()
+  ];
   Route::get('/', 'Modules\\' . str_replace('-', '_', module_env('NAME'))  . '\App\Http\Controllers\Controller@view_index');
+  Route::get('/config', 'Modules\\' . str_replace('-', '_', module_env('NAME'))  . '\App\Http\Controllers\Controller@view_config');
+  Route::prefix('market')->group(function () use ($module) {
+    Route::get('/', function (Request $request) use ($module) {
+      return view("admin.market.index", $module);
+    });
+  });
 });

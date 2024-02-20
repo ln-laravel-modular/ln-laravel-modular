@@ -13,6 +13,6 @@ trait ViewTrait
 {
   function view_index(Request $request)
   {
-    return view('temp.welcome');
+    return view('temp.welcome', ['module_env' => module_env(), 'module_config' => module_config()]);
   }
 }
