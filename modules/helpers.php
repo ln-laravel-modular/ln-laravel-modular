@@ -102,7 +102,13 @@ if (!function_exists('module_env')) {
   }
 }
 if (!function_exists('module_config')) {
-  function module_config($key = null, $file = null)
+  /**
+   * 获取模块的配置文件内容
+   *
+   * @param [type] $key null/admin.admin
+   * @return void
+   */
+  function module_config($key = null)
   {
     $backtrace =  debug_backtrace();
     $file_path = $backtrace[0]['file'];

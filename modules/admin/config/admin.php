@@ -2,6 +2,14 @@
 
 return [
   "title" => "Laravel Modular",
+  "name" => "admin",
+  "prefix" => "admin",
+  "route_prefix" => "admin",
+  "key" => "",
+  "md5" => "",
+  "component" => "",
+  "layout" => "adminlte",
+  "theme" => "default",
   "menu" => [
     ["path" => "", "title" => "总览面板", "icon" => "fas fa-tachometer-alt", "slug" => "",  "children" => [
       ["path" => "", "title" => "Dashboard v1", "icon" => "far fa-circle", "slug" => "",  "children" => []],
