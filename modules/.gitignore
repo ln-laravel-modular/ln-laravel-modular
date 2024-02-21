@@ -1,3 +1,2 @@
-installed
-adminlte
-webstack
+*
+!.gitignore
