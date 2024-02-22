@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('market')->group(function () {
+    Route::get('/', function () {
+        return view('market.index');
+    });
+});

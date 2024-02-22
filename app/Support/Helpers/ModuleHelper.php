@@ -15,8 +15,11 @@ class ModuleHelper
 {
     static function current()
     {
-        $backtrace =  debug_backtrace();
-        $file_path = $backtrace[1]['file'];
+        // 查找当前模块
+        $backtrace = Arr::first(debug_backtrace(), function ($debug) {
+            return strtolower(substr($debug['file'] ?? '', 0, strlen(base_path('modules'))))  == strtolower(base_path('modules'));
+        });
+        $file_path = $backtrace['file'];
         $file_path = substr($file_path, strlen(base_path('modules')) + 1);
         $module_dir = substr($file_path, 0, strpos($file_path, '\\'));
         return $module_dir;
