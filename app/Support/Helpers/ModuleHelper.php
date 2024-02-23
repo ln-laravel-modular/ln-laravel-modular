@@ -9,10 +9,16 @@ namespace App\Support\Helpers;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
-
+use Nwidart\Modules\Facades\Module;
 
 class ModuleHelper
 {
+    static $keyMap = [
+        'prefix' => ['web.prefix', 'api.prefix', 'table.prefix'],
+        'component' => ['web.component'],
+        'layout' => ['web.layout'],
+        'theme' => ['web.theme'],
+    ];
     static function current()
     {
         // 查找当前模块
@@ -24,10 +30,39 @@ class ModuleHelper
         $module_dir = substr($file_path, 0, strpos($file_path, '\\'));
         return $module_dir;
     }
-
+    /**
+     * 获取指定关键字的值
+     * 如果该关键字属于映射中，则可取上级关键字
+     *
+     * @param [type] $key
+     * @return void
+     */
     static function current_config($key)
     {
-        return Config::get(strtolower(self::current()) . '.' . $key);
+        $current = strtolower(self::current());
+        $config = Config::get($current) ?? require base_path('modules/' . $current . '/config/config.php');
+        foreach (self::$keyMap as $config_key => $config_map) {
+            if (in_array($key, $config_map)) {
+                return Arr::get($config, $key) ?? Arr::get($config, $config_key);
+            }
+        }
+        return Arr::get($config, $key);
+    }
+    /**
+     * 获取所有模块指定关键字的值
+     *
+     * @return void
+     */
+    static function config_all($key)
+    {
+        return array_map(function ($module) use ($key) {
+            return Config::get(strtolower($module) . '.' . $key);
+        }, array_keys(Module::all()));
+    }
+
+    static function config_collapse_all($key)
+    {
+        return Arr::collapse(self::config_all($key));
     }
 }
 /**
