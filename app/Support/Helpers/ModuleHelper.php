@@ -37,10 +37,11 @@ class ModuleHelper
      * @param [type] $key
      * @return void
      */
-    static function current_config($key)
+    static function current_config($key = null)
     {
         $current = strtolower(self::current());
         $config = Config::get($current) ?? require base_path('modules/' . $current . '/config/config.php');
+        if (empty($key)) return $config;
         foreach (self::$keyMap as $config_key => $config_map) {
             if (in_array($key, $config_map)) {
                 return Arr::get($config, $key) ?? Arr::get($config, $config_key);
@@ -51,7 +52,7 @@ class ModuleHelper
     /**
      * 获取所有模块指定关键字的值
      *
-     * @return void
+     * @return array
      */
     static function config_all($key)
     {
@@ -59,7 +60,12 @@ class ModuleHelper
             return Config::get(strtolower($module) . '.' . $key);
         }, array_keys(Module::all()));
     }
-
+    /**
+     * Undocumented function
+     *
+     * @param [type] $key
+     * @return array
+     */
     static function config_collapse_all($key)
     {
         return Arr::collapse(self::config_all($key));

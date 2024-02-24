@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class Helper
 {
+    public static function array_trans_key()
+    {
+    }
 }
+
 
 /**
  * 查看禁用函数
