@@ -17,4 +17,9 @@ class Controller extends \Illuminate\Routing\Controller
         $module_config = ModuleHelper::current_config();
         return view($view, array_merge(['module_config' => $module_config], $data), $mergeData);
     }
+
+    public static function from_admin()
+    {
+        return preg_match('/^admin*/', request()->route()->getPrefix());
+    }
 }

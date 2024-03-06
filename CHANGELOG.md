@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- [ ] 应用安装模块 Market
 - [x] 默认 UI 框架选择: [Bootstrap@4](https://v4.bootcss.com/)
 - [x] 默认后台 UI 模板选择: AdminLTE
 - [x] 自适应Laravel模块加载器: [nwidart/laravel-modules@8](https://laravelmodules.com/docs/v8/introduction)
@@ -10,6 +11,15 @@
 ```sh
 composer require nwidart/laravel-modules@8.0.3
 ```
+
+## 模块分类
+
+- 核心：Core
+- 底层：Admin、Market、Temp
+- 样式：bootstrap、adminlte
+- 应用：navigation、toolkit
+- 主题：webstack(navigation)
+- 拓展：crypto(toolkit)
 
 ## 目录结构
 
@@ -149,3 +159,5 @@ return [
     "requires": []
 }
 ```
+
+## helper
