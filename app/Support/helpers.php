@@ -310,3 +310,15 @@ if (!function_exists('module_view')) {
         return view($view, $data, $mergeData);
     }
 }
+if (!function_exists('module_current')) {
+    function module_current($view = null, $data = [], $mergeData = [])
+    {
+        return view($view, $data, $mergeData);
+    }
+}
+if (!function_exists('module_config')) {
+    function module_config($view = null, $data = [], $mergeData = [])
+    {
+        return view($view, $data, $mergeData);
+    }
+}
