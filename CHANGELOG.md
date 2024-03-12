@@ -17,7 +17,7 @@ composer require nwidart/laravel-modules@8.0.3
 - 核心：Core
 - 底层：Admin、Market、Temp
 - 样式：bootstrap、adminlte
-- 应用：navigation、toolkit
+- 应用：todo、note、navigation、toolkit
 - 主题：webstack(navigation)
 - 拓展：crypto(toolkit)
 
@@ -35,7 +35,10 @@ Modules/
      │  └─ Seeders/
      │     └─ BlogDatabaseSeeder.php
      ├─ Entities/
-     ├─ /Events/
+     │  ├─ BlogContent.php
+     │  ├─ BlogMeta.php
+     │  └─ BlogRelationship.php
+     ├─ Events/
      ├─ Http/
      │  ├─ Controllers/
      │  │  └─ BlogController.php
@@ -43,15 +46,16 @@ Modules/
      │  └─ Requests/
      ├─ Providers/
      │  ├─ BlogServiceProvider.php
-     │  ├─ RouteServiceProvider.php
+     │  └─ RouteServiceProvider.php
      ├─ Public/
-     ├─ /Repositories/
+     ├─ Repositories/
      ├─ Resources/
      │  ├─ assets/
      │  │  ├─ js/
      │  │  └─ sass/
      │  ├─ lang/
      │  └─ views/
+     │     ├─ {project}/
      │     ├─ admin/
      │     │  └─ config.blade.php
      │     ├─ /components/
@@ -66,8 +70,8 @@ Modules/
      ├─ Tests/
      │  ├─ Feature/
      │  └─ Unit/
-     ├─ /View/
-     │  └─ /Components/
+     ├─ View/
+     │  └─ Components/
      ├─ CHANGELOG.md
      ├─ composer.json
      ├─ LICENSE
@@ -161,3 +165,16 @@ return [
 ```
 
 ## helper
+
+### Module
+
+```php
+// 返回当前模块文件夹名
+Module::current();
+// 返回所有模块的配置信息
+Module::allConfig();
+// 返回所有 enabled 模块的配置信息
+Module::allEnabledConfig();
+// 返回所有 disabled 模块的配置信息
+Module::allDisabledConfig();
+```

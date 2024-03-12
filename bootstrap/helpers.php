@@ -1,10 +1,12 @@
 <?php
 
+use App\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Console\OutputStyle;
 use ZanySoft\Zip\Zip;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Str;
+use Nwidart\Modules\Laravel\Module;
 
 /**
  * 查看禁用函数
@@ -322,3 +324,5 @@ if (!function_exists('module_config')) {
         return view($view, $data, $mergeData);
     }
 }
+
+
