@@ -26,18 +26,33 @@ class ModuleServiceProvider extends ServiceProvider
             $file_path = $backtrace['file'];
             $file_path = substr($file_path, strlen(base_path('modules')) + 1);
             $module_dir = substr($file_path, 0, strpos($file_path, '\\'));
-            return $module_dir;
+            return strtolower($module_dir);
         });
         // 返回指定关键字的值，如果该关键字属于映射中，则可取上级关键字
-        \Nwidart\Modules\Module::macro('currentConfig', function ($key = null, $current = null) {
+        \Nwidart\Modules\Module::macro('currentConfig', function ($key = null, $current = null, ...$extras) {
             $current = empty($current) ? strtolower(\Nwidart\Modules\Module::current()) : $current;
             $config = Config::get($current) ?? require base_path('modules/' . $current . '/config/config.php');
+
+            // 读取本地文件并分组
+            if (in_array('files', $extras)) {
+                $files = app('files')->allFiles('modules\\' . Module::currentConfig('name', $current));
+                foreach (config('modules.config.files') ?? [] as $fileKey => $filePath) {
+                    $config[$fileKey] = [];
+                    foreach ($files as $file) {
+                        if (substr($file->getRelativePathName(), 0, strlen($filePath)) == $filePath) {
+                            array_push($config[$fileKey], "\\Modules\\" . $config['name'] . "\\" . $file->getRelativePath() . "\\" . pathinfo($file->getPathName(), PATHINFO_FILENAME));
+                        }
+                    }
+                }
+            }
+
             if (empty($key)) return $config;
             foreach (config("modules.config.key-map") as $config_key => $config_map) {
                 if (in_array($key, $config_map)) {
                     return Arr::get($config, $key) ?? Arr::get($config, $config_key);
                 }
             }
+            // var_dump($config, $key);
             return Arr::get($config, $key);
         });
         // 返回所有模块指定关键字的值
@@ -60,10 +75,15 @@ class ModuleServiceProvider extends ServiceProvider
         // 更新模块配置
         \Nwidart\Modules\Module::macro('setCurrentConfig', function ($key = null, $value = null, $current = null) {
             $current = empty($current) ? strtolower(\Nwidart\Modules\Module::current()) : $current;
-            $return = \Nwidart\Modules\Module::currentConfig(null, $current);
+            $return = [];
             // 全部更新
             if (empty($key)) {
+                $return = $value;
+            } else {
+                $return = \Nwidart\Modules\Module::currentConfig(null, $current);
+                Arr::set($return, $key, $value);
             }
+            // 清除附加字段
             // 创建PHP文件并写入数组
             file_put_contents(base_path('modules/' . $current . '/config/config.php'), "<?php\n\nreturn " . var_export($return, true) . ";\n");
             return $return;

@@ -21,6 +21,15 @@ composer require nwidart/laravel-modules@8.0.3
 - 主题：webstack(navigation)
 - 拓展：crypto(toolkit)
 
+### 模块继承规则
+
+```sh
+ui.layouts.master
+   └─ project.layouts.master
+      ├─ project.web.index
+      └─ project.admin.index
+```
+
 ## 目录结构
 
 ```sh

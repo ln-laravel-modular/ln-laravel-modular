@@ -286,7 +286,7 @@ return [
     'config' => [
         'update-keys' => [
             'basic' => ['name', 'slug', 'title', 'type', 'description'],
-            'view' => ['component', 'layout', 'theme'],
+            'view' => ['ui', 'component', 'layout', 'theme'],
             'route' => ['prefix', 'web.prefix', 'admin.prefix', 'table.prefix'],
             'layout' => ['sidebar', 'navbar', 'web.sidebar', 'admin.sidebar'],
             'other' => ['key', 'md5'],
