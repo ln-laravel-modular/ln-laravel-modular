@@ -1,6 +1,3 @@
-require('./bootstrap');
-
-
 if (window.axios) {
     // 添加一个请求拦截器
     axios.interceptors.request.use(function (config) {

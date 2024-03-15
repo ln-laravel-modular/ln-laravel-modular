@@ -7,6 +7,8 @@
 <!-- - [ ] 模块加载器: ModuleLoader -->
 <!-- - [ ] 模块辅助函数器: module-helpers -->
 - [x] Markdown 转 HTML: `Str::markdown()`
+- [ ] Market
+- [ ] Themes
 
 ```sh
 composer require nwidart/laravel-modules@8.0.3
@@ -98,6 +100,7 @@ return [
     "slug" => "",
     'title' => "",
     "prefix" => null,
+    "ui" => null,
     "component" => null,
     "layout" => "bootstrap",
     "theme" => "default",

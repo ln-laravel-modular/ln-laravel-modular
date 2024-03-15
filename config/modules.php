@@ -95,7 +95,7 @@ return [
         |
         */
 
-        'migration' => base_path('database/migrations'),
+        'migration' => base_path('Database\\migrations'),
         /*
         |--------------------------------------------------------------------------
         | Generator path
@@ -105,26 +105,30 @@ return [
         */
         'generator' => [
             'config' => ['path' => 'Config', 'generate' => true],
-            'command' => ['path' => 'Console', 'generate' => true],
-            'migration' => ['path' => 'Database/Migrations', 'generate' => true],
-            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
-            'factory' => ['path' => 'Database/factories', 'generate' => true],
-            'model' => ['path' => 'Entities', 'generate' => true],
+            'command' => ['path' => 'Console\\Commands', 'generate' => false],
+            'migration' => ['path' => 'Database\\Migrations', 'generate' => false],
+            'seed' => ['path' => 'Database\\Seeders', 'generate' => false],
+            'seeder' => ['path' => 'Database\\Seeders', 'generate' => true],
+            'factory' => ['path' => 'Database\\factories', 'generate' => false],
+            'model' => ['path' => 'Models', 'generate' => false],
             'routes' => ['path' => 'Routes', 'generate' => true],
-            'controller' => ['path' => 'Http/Controllers', 'generate' => true],
-            'filter' => ['path' => 'Http/Middleware', 'generate' => true],
-            'request' => ['path' => 'Http/Requests', 'generate' => true],
+            'controller' => ['path' => 'Http\\Controllers', 'generate' => true],
+            // 'filter' => ['path' => 'Http\\Middleware', 'generate' => false],
+            'middleware' => ['path' => 'Http\\Middleware', 'generate' => false],
+            'request' => ['path' => 'Http\\Requests', 'generate' => false],
             'provider' => ['path' => 'Providers', 'generate' => true],
-            'assets' => ['path' => 'Resources/assets', 'generate' => true],
-            'lang' => ['path' => 'Resources/lang', 'generate' => true],
-            'views' => ['path' => 'Resources/views', 'generate' => true],
-            'views-admin' => ['path' => 'Resources/views/admin', 'generate' => true],
-            'views-market' => ['path' => 'Resources/views/market', 'generate' => true],
-            'public' => ['path' => 'Public', 'generate' => true],
-            'test' => ['path' => 'Tests/Unit', 'generate' => false],
-            'test-feature' => ['path' => 'Tests/Feature', 'generate' => false],
+            'assets' => ['path' => 'Resources\\assets', 'generate' => true],
+            'lang' => ['path' => 'Resources\\lang', 'generate' => false],
+            'views' => ['path' => 'Resources\\views', 'generate' => true],
+            'views-admin' => ['path' => 'Resources\\views\\admin', 'generate' => true],
+            'views-market' => ['path' => 'Resources\\views\\market', 'generate' => true],
+            'views-layout' => ['path' => 'Resources\\views\\layouts', 'generate' => true],
+            'component-view' => ['path' => 'Resources\\views\\components', 'generate' => true],
+            'public' => ['path' => 'Public', 'generate' => false],
+            'test' => ['path' => 'Tests\\Unit', 'generate' => false],
+            'test-feature' => ['path' => 'Tests\\Feature', 'generate' => false],
             'support' => ['path' => 'Support', 'generate' => false],
-            'trait' => ['path' => 'Http/Traits', 'generate' => false],
+            'trait' => ['path' => 'Http\\Traits', 'generate' => false],
             'repository' => ['path' => 'Repositories', 'generate' => false],
             'event' => ['path' => 'Events', 'generate' => false],
             'listener' => ['path' => 'Listeners', 'generate' => false],
@@ -134,8 +138,8 @@ return [
             'emails' => ['path' => 'Emails', 'generate' => false],
             'notifications' => ['path' => 'Notifications', 'generate' => false],
             'resource' => ['path' => 'Transformers', 'generate' => false],
-            'component-view' => ['path' => 'Resources/views/components', 'generate' => false],
-            'component-class' => ['path' => 'View/Components', 'generate' => false],
+            'component' => ['path' => 'View\\Components', 'generate' => false],
+            'component-class' => ['path' => 'View\\Components', 'generate' => false],
         ],
     ],
 
@@ -287,9 +291,9 @@ return [
         'update-keys' => [
             'basic' => ['name', 'slug', 'title', 'type', 'description'],
             'view' => ['ui', 'component', 'layout', 'theme'],
-            'route' => ['prefix', 'web.prefix', 'admin.prefix', 'table.prefix'],
+            'route' => ['prefix', 'web.prefix', 'api.prefix', 'admin.prefix', 'db.prefix', 'table.prefix'],
             'layout' => ['sidebar', 'navbar', 'web.sidebar', 'admin.sidebar'],
-            'other' => ['key', 'md5'],
+            'other' => ['key', 'md5', 'uuid'],
         ],
         'key-map' => [
             'prefix' => ['web.prefix', 'api.prefix', 'table.prefix'],
@@ -299,10 +303,13 @@ return [
         ],
         "files" => [
             'controllers' => 'Http\Controllers\\',
-            'seeders' => 'Database\Seeders\\',
-            'entities' => 'Entities\\',
+            'seeds' => 'Database\Seeders\\',
+            'models' => 'Entities\\',
             'factories' => 'Database\factories\\',
-            'migrations' => 'Database\Migrations\\'
+            'migrations' => 'Database\Migrations\\',
+            'components' => 'View\Components\\',
+            'component-views' => 'Resources\views\components\\',
+            'layouts' => 'Resources\views\layouts\\',
         ],
         'commands' => [
             "delete" => [],

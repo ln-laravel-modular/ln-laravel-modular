@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Facades\Module as FacadesModule;
@@ -33,22 +34,41 @@ class ModuleServiceProvider extends ServiceProvider
             $current = empty($current) ? strtolower(\Nwidart\Modules\Module::current()) : $current;
             $config = Config::get($current) ?? require base_path('modules/' . $current . '/config/config.php');
 
-            // 读取本地文件并分组
+            // slug
+            if (!isset($config['slug'])) $config['slug'] = strtolower($config['name']);
+            // prefix
+            if (isset($config['prefix'])) {
+                if (!isset($config['web']['prefix'])) $config['web']['prefix'] = $config['prefix'];
+            }
+
+
+            // 读取当前模块文件并分组
             if (in_array('files', $extras)) {
+                $config['generators'] = config('modules.paths.generator');
                 $files = app('files')->allFiles('modules\\' . Module::currentConfig('name', $current));
-                foreach (config('modules.config.files') ?? [] as $fileKey => $filePath) {
+                // array_push($config['files'], "\\Modules\\" . $config['name'] . "\\" . $file->getRelativePath() . "\\" . pathinfo($file->getPathName(), PATHINFO_FILENAME));
+                foreach (config('modules.paths.generator') ?? [] as $fileKey => $generator) {
+                    Arr::set($config['generators'], $fileKey . '.path', '\\Modules\\' . $config['name'] . '\\' . $generator['path']);
+                    if (in_array($fileKey, ['config', 'routes'])) continue;
+                    $fileKey = Str::plural($fileKey);
                     $config[$fileKey] = [];
+                    $filePath = $generator['path'];
                     foreach ($files as $file) {
+                        // var_dump([$file->getRelativePathName(), substr($file->getRelativePathName(), 0, strlen($filePath)), $filePath]);
                         if (substr($file->getRelativePathName(), 0, strlen($filePath)) == $filePath) {
                             array_push($config[$fileKey], "\\Modules\\" . $config['name'] . "\\" . $file->getRelativePath() . "\\" . pathinfo($file->getPathName(), PATHINFO_FILENAME));
                         }
                     }
                 }
             }
+            // 读取当前模块可适配主题
+            if (in_array('themes', $extras)) {
+            }
 
             if (empty($key)) return $config;
             foreach (config("modules.config.key-map") as $config_key => $config_map) {
                 if (in_array($key, $config_map)) {
+                    // Arr::set($config, $key);
                     return Arr::get($config, $key) ?? Arr::get($config, $config_key);
                 }
             }
@@ -84,6 +104,11 @@ class ModuleServiceProvider extends ServiceProvider
                 Arr::set($return, $key, $value);
             }
             // 清除附加字段
+            unset($return['generators']);
+            foreach (config('modules.paths.generator') ?? [] as $fileKey => $generator) {
+                $fileKey = Str::plural($fileKey);
+                unset($return[$fileKey]);
+            }
             // 创建PHP文件并写入数组
             file_put_contents(base_path('modules/' . $current . '/config/config.php'), "<?php\n\nreturn " . var_export($return, true) . ";\n");
             return $return;
