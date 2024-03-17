@@ -8,7 +8,9 @@
 <!-- - [ ] 模块辅助函数器: module-helpers -->
 - [x] Markdown 转 HTML: `Str::markdown()`
 - [ ] Market
-- [ ] Themes
+- [ ] Themes: theme-packages
+- [ ] Examples: example-packages
+- [ ]
 
 ```sh
 composer require nwidart/laravel-modules@8.0.3

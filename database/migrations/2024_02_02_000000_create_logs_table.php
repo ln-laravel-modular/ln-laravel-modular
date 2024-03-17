@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFieldsTable extends Migration
+class CreateLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create(ModuleHelper::current_config('db_prefix') . '_fields', function (Blueprint $table) {
-            $table->id('lid');
+        Schema::create('_logs', function (Blueprint $table) {
+            $table->id();
 
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('log');
     }
 }

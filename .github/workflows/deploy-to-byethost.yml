@@ -1,0 +1,41 @@
+name: 🚀 Deploy master on push with FTP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      # - name: Install node dependencies
+      #   run: yarn install
+
+      # - name: Laravel mix
+      #   run: npm run prod
+
+      - name: Install composer dependencies
+        run: composer install
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          # ftp server
+          server: ftpupload.net
+          # ftp username
+          username: b9_36151388
+          # ftp password
+          password: ${{ secrets.ftp_password }}
+          # Path to upload to on the server. Must end with trailing slash /
+          server-dir: /htdocs/
+          # File to Exclude
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github*/**
+            **/node_modules/**

@@ -1,4 +1,4 @@
-@props(['props'])
+@props(['props' => []])
 @php
 @endphp
 

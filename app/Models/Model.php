@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\Config;
 
-class Model extends BaseModel
+class Model extends \Illuminate\Database\Eloquent\Model
 {
     use HasFactory, FamilyTree, TableRelationship;
 
@@ -27,15 +27,15 @@ class Model extends BaseModel
 
     protected static $unguarded = false;
 
-    function __construct()
+    public function __construct()
     {
         $this->setPrefix();
     }
-    function setPrefix($prefix = null)
+    public function setPrefix($prefix = null)
     {
         $this->prefix = $prefix ?? Config::get(strtolower(ModuleHelper::current()) . '.db_prefix');
     }
-    function getPrefix()
+    public function getPrefix()
     {
         return $this->prefix;
     }
@@ -73,7 +73,7 @@ trait FamilyTree
      */
     public function parent()
     {
-        return $this->hasOne(static::class, $this->primaryKey, $this->parentColumn,);
+        return $this->hasOne(static::class, $this->primaryKey, $this->parentKey,);
     }
 
     public function parent_exists()
@@ -81,11 +81,11 @@ trait FamilyTree
     }
     public function parents()
     {
-        return $this->hasOne(static::class, $this->primaryKey, $this->parentColumn,)->with('parent');
+        return $this->hasOne(static::class, $this->primaryKey, $this->parentKey,)->with('parent');
     }
     public function root()
     {
-        return $this->hasOne(static::class, $this->primaryKey, $this->parentColumn,)->with('root');
+        return $this->hasOne(static::class, $this->primaryKey, $this->parentKey,)->with('root');
     }
     /**
      * Retrieve the root parent of the current category.
@@ -118,11 +118,7 @@ trait FamilyTree
      */
     public function children()
     {
-        return $this->hasMany(static::class, $this->parentColumn, $this->primaryKey);
-    }
-
-    public function children_count()
-    {
+        return $this->hasMany(static::class, $this->parentKey, $this->primaryKey);
     }
 }
 
@@ -169,7 +165,7 @@ trait StatusDraft
      */
     public function draft()
     {
-        return $this->hasOne(static::class, $this->parentColumn, $this->primaryKey)->with($this->fieldColumns ?? [])->where([['status', 'draft']]);
+        return $this->hasOne(static::class, $this->parentKey, $this->primaryKey)->with($this->fieldColumns ?? [])->where([['status', 'draft']]);
     }
 
     /**
@@ -177,7 +173,7 @@ trait StatusDraft
      */
     public function drafts()
     {
-        return $this->hasMany(static::class, $this->parentColumn, $this->primaryKey)->with($this->fieldColumns ?? [])->where([['status', 'draft']]);
+        return $this->hasMany(static::class, $this->parentKey, $this->primaryKey)->with($this->fieldColumns ?? [])->where([['status', 'draft']]);
     }
 
     /**
