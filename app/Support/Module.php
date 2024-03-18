@@ -18,7 +18,7 @@ class Module extends \Nwidart\Modules\Facades\Module
 {
     // use \Illuminate\Support\Traits\Macroable;
 
-    public function current(): string
+    public static function current(): string
     {
         // 查找当前模块
         $backtrace = Arr::first(debug_backtrace(), function ($debug) {
@@ -32,7 +32,7 @@ class Module extends \Nwidart\Modules\Facades\Module
     }
 
     // 返回指定关键字的值，如果该关键字属于映射中，则可取上级关键字
-    public function currentConfig($key = null, $current = null, ...$extras)
+    public static function currentConfig($key = null, $current = null, ...$extras)
     {
         $current = empty($current) ? strtolower(Module::current()) : $current;
         $config = Config::get($current) ?? require base_path('modules/' . $current . '/config/config.php');
@@ -80,7 +80,7 @@ class Module extends \Nwidart\Modules\Facades\Module
         return Arr::get($config, $key);
     }
     // 返回所有模块指定关键字的值
-    public function allConfig($key = null)
+    public static function allConfig($key = null)
     {
         // 返回所有模块文件夹名
         $return = Module::all();
@@ -94,12 +94,12 @@ class Module extends \Nwidart\Modules\Facades\Module
         return $return;
     }
     // 返回将多个数组合并为一个数组
-    public function allConfigCollapse($key)
+    public static function allConfigCollapse($key)
     {
         return Arr::collapse(Module::allConfig($key));
     }
     // 更新模块配置
-    public function setCurrentConfig($key = null, $value = null, $current = null)
+    public static function setCurrentConfig($key = null, $value = null, $current = null)
     {
         $current = empty($current) ? strtolower(Module::current()) : $current;
         $return = [];
@@ -121,7 +121,7 @@ class Module extends \Nwidart\Modules\Facades\Module
         return $return;
     }
     //
-    public function view()
+    public static function view()
     {
         return "I'm a macro";
     }
