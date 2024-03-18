@@ -6,7 +6,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 // use Nwidart\Modules\Facades\Module as FacadesModule;
-
+/**
+ * @method static string current()
+ * @method static mixed currentConfig($key = null, $current = null, ...$extras)
+ * @method static mixed allConfig($key = null)
+ * @method static mixed allConfigCollapse($key)
+ * @method static mixed setCurrentConfig($key = null, $value = null, $current = null)
+ *
+ */
 class Module extends \Nwidart\Modules\Facades\Module
 {
     // use \Illuminate\Support\Traits\Macroable;
