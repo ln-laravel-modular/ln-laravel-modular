@@ -36,7 +36,7 @@ class Module extends \Nwidart\Modules\Facades\Module
     // 返回指定关键字的值，如果该关键字属于映射中，则可取上级关键字
     public static function currentConfig($key = null, $current = null, ...$extras)
     {
-        $current = empty($current) ? (is_win() ? strtolower(Module::current()) : $current) : $current;
+        $current = empty($current) ? Module::current() : $current;
         $config = Config::get($current) ?? require base_path('modules' . DIRECTORY_SEPARATOR . $current . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php');
 
         // var_dump([$current, $config]);
@@ -103,7 +103,7 @@ class Module extends \Nwidart\Modules\Facades\Module
     // 更新模块配置
     public static function setCurrentConfig($key = null, $value = null, $current = null)
     {
-        $current = empty($current) ? (is_win() ? strtolower(Module::current()) : $current) : $current;
+        $current = empty($current) ? Module::current() : $current;
         $return = [];
         // 全部更新
         if (empty($key)) {
