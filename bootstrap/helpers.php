@@ -326,3 +326,70 @@ if (!function_exists('module_config')) {
 }
 
 
+if (!function_exists('get_user_os')) {
+    function get_user_os()
+    {
+
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (strpos($agent, "NT 6.1")) {
+
+            $os_name = "Windows 7";
+        } elseif (strpos($agent, "NT 5.1")) {
+
+            $os_name = "Windows XP (SP2)";
+        } elseif (strpos($agent, "NT 5.2") && strpos($agent, "WOW64")) {
+
+            $os_name = "Windows XP 64-bit Edition";
+        } elseif (strpos($agent, "NT 5.2")) {
+
+            $os_name = "Windows 2003";
+        } elseif (strpos($agent, "NT 6.0")) {
+
+            $os_name = "Windows Vista";
+        } elseif (strpos($agent, "NT 5.0")) {
+
+            $os_name = "Windows 2000";
+        } elseif (strpos($agent, "4.9")) {
+
+            $os_name = "Windows ME";
+        } elseif (strpos($agent, "NT 4")) {
+
+            $os_name = "Windows NT 4.0";
+        } elseif (strpos($agent, "98")) {
+
+            $os_name = "Windows 98";
+        } elseif (strpos($agent, "95")) {
+
+            $os_name = "Windows 95";
+        } elseif (strpos($agent, "Linux")) {
+
+            $os_name = "Linux";
+        }
+
+        if (strpos($os_name, "Linux") !== false) {
+
+            $os_str = "Linux操作系统";
+        } else if (strpos($os_name, "Windows") !== false) {
+
+            $os_str = "Windows操作系统";
+        } else {
+
+            $os_str = "未知操作系统";
+        }
+
+        return $os_str;
+    }
+}
+if (!function_exists('is_win')) {
+    function is_win()
+    {
+        return strpos(PHP_OS, 'WIN') !== false;
+    }
+}
+if (!function_exists('is_linux')) {
+    function is_linux()
+    {
+        return strpos(PHP_OS, 'Linux') !== false;
+    }
+}
