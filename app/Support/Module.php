@@ -42,6 +42,7 @@ class Module extends \Nwidart\Modules\Facades\Module
         // var_dump([$current, $config]);
         // slug
         if (!isset($config['slug'])) $config['slug'] = strtolower($config['name']);
+        if (!isset($config['layout'])) $config['layout'] = 'master';
         // prefix
         if (isset($config['prefix'])) {
             if (empty(Arr::get($config, 'web.prefix'))) Arr::set($config, 'web.prefix', $config['prefix']);

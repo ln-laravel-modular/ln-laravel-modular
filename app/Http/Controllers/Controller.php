@@ -17,13 +17,20 @@ class Controller extends \Illuminate\Routing\Controller
     {
         $return = array_merge([
             'request' => request()->all(),
-            'config' => Module::currentConfig()
-        ], $data);
+            'config' => $config = Module::currentConfig()
+        ], is_array($view) ? $view : [], $data);
+
         if (env('WEB_CONSOLE')) {
             echo "<script>window.\$data=" . json_encode($return, JSON_UNESCAPED_UNICODE) . ";</script>";
             echo "<script>console.log(`\$data`, window.\$data);</script>";
         }
-        return view($view, $return, $mergeData);
+        if (is_array($view) ? !isset($view['view']) : empty($view)) abort(404);
+
+        return view(
+            is_array($view) ? $config['slug'] . '::' . $config['slug'] . '.' . $config['layout'] . '.' . $return['view'] : $view,
+            $return,
+            $mergeData
+        );
     }
 
     public function from_admin()
