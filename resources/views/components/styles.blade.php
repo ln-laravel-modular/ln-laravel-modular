@@ -1,7 +1,9 @@
-@props(['props' => []])
-@php
-@endphp
+@props(['props' => [], 'module' => '', 'name' => '', 'version' => '', 'file' => ''])
 
-@push('styles')
-  <link rel="stylesheet" href="/public/vendor/{{ $props }}">
-@endpush
+@empty($props)
+  <x-style :module="$module" :name="$name" :version="$version" :file="$file"></x-style>
+@else
+  @foreach ($props as $prop)
+    <x-style :module="$prop['module']" :name="$prop['name'] ?? ''" :version="$prop['version'] ?? ''" :file="$prop['file'] ?? ''"></x-style>
+  @endforeach
+@endempty

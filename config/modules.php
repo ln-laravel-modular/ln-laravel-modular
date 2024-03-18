@@ -110,6 +110,7 @@ return [
             'seed' => ['path' => 'Database/Seeders', 'generate' => false],
             'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
             'factory' => ['path' => 'Database/factories', 'generate' => false],
+            'initialization' => ['path' => 'Database/initializations', 'generate' => false],
             'model' => ['path' => 'Models', 'generate' => false],
             'routes' => ['path' => 'Routes', 'generate' => true],
             'controller' => ['path' => 'Http/Controllers', 'generate' => true],

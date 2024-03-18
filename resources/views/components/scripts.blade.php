@@ -1,11 +1,12 @@
-@props([
-    'props' => [],
-    'name' => '',
-    'file' => '',
-])
+@props(['props' => [], 'module' => '', 'name' => '', 'version' => '', 'file' => ''])
+
 @php
 @endphp
 
-@push('scripts')
-  <script src="/public/vendor/{{ $props }}"></script>
-@endpush
+@empty($props)
+  <x-script :module="$module" :name="$name" :version="$version" :file="$file"></x-script>
+@else
+  @foreach ($props as $prop)
+    <x-script :module="$prop['module']" :name="$prop['name'] ?? ''" :version="$prop['version'] ?? ''" :file="$prop['file'] ?? ''"></x-script>
+  @endforeach
+@endempty
