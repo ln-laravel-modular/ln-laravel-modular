@@ -26,6 +26,7 @@ mix.copyDirectory('node_modules/axios/dist', 'public/vendor/axios/0.21.4');
 mix.copyDirectory('node_modules/bootstrap/dist', 'public/vendor/bootstrap/4.6.2');
 // "bootstrap-icons": "^1.11.3",
 mix.copyDirectory('node_modules/bootstrap-icons/font', 'public/vendor/bootstrap-icons/1.11.3');
+// "highlight.js": "^11.9.0",
 // "holderjs": "^2.9.9",
 mix.copy('node_modules/holderjs/holder.js', 'public/vendor/holderjs/2.9.9/holder.js');
 mix.copy('node_modules/holderjs/holder.min.js', 'public/vendor/holderjs/2.9.9/holder.min.js');
@@ -34,6 +35,8 @@ mix.copyDirectory('node_modules/jquery/dist', 'public/vendor/jquery/3.7.1');
 // "lodash": "^4.17.21",
 mix.copy('node_modules/lodash/lodash.js', 'public/vendor/lodash/4.17.21/lodash.js');
 mix.copy('node_modules/lodash/lodash.min.js', 'public/vendor/lodash/4.17.21/lodash.min.js');
+// "markdown-it": "^14.1.0",
+mix.copyDirectory('node_modules/markdown-it/dist', 'public/vendor/markdown-it/14.1.0');
 // "mockjs": "^1.1.0",
 mix.copyDirectory('node_modules/mockjs/dist', 'public/vendor/mockjs/1.1.0');
 // "normalize.css": "^8.0.1",
