@@ -13,11 +13,11 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      # - name: Install node dependencies
-      #   run: yarn install
+      - name: Install node dependencies
+        run: yarn install
 
-      # - name: Laravel mix
-      #   run: npm run prod
+      - name: Laravel mix
+        run: npm run prod
 
       - name: Install composer dependencies
         run: composer install

@@ -134,3 +134,13 @@ class Module extends \Nwidart\Modules\Facades\Module
 // var_dump(Module::currentConfig());
 // var_dump(Module::allConfigCollapse('admin.sidebar'));
 // Module::mixin(new Module);
+
+trait ConfigTrait
+{
+}
+trait PackageTrait
+{
+}
+trait ComposerTrait
+{
+}
