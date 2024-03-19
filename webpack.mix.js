@@ -31,5 +31,7 @@ mix.copyDirectory('node_modules/jquery/dist', 'public/vendor/jquery/3.7.1');
 // "lodash": "^4.17.21",
 mix.copy('node_modules/lodash/lodash.js', 'public/vendor/lodash/4.17.21/lodash.js');
 mix.copy('node_modules/lodash/lodash.min.js', 'public/vendor/lodash/4.17.21/lodash.min.js');
+// "normalize.css": "^8.0.1",
+mix.copy('node_modules/normalize.css/normalize.css', 'public/vendor/normalize.css/8.0.1/normalize.css');
 // "popper.js": "^1.16.1",
 mix.copyDirectory('node_modules/popper.js/dist/umd', 'public/vendor/popper.js/1.16.1');
