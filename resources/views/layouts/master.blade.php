@@ -29,7 +29,7 @@
       ['bootstrap', 'css/bootstrap.min'],
       ['bootstrap', 'css/bootstrap-theme.min'],
       ['bootstrap-icons', 'bootstrap-icons.min'],
-      ['fontawesome', 'css/fontawesome.min'],
+      ['@fortawesome/fontawesome-free', 'css/all.min'],
       ['/public/app/css/app'],
   ]">
   </x-styles>
