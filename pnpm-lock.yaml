@@ -5,9 +5,11 @@ specifiers:
   axios: ^0.21.4
   bootstrap: ^4.6.2
   bootstrap-icons: ^1.11.3
+  holderjs: ^2.9.9
   jquery: ^3.7.1
   laravel-mix: ^6.0.6
   lodash: ^4.17.21
+  mockjs: ^1.1.0
   normalize.css: ^8.0.1
   popper.js: ^1.16.1
   postcss: ^8.1.14
@@ -21,9 +23,11 @@ devDependencies:
   axios: 0.21.4
   bootstrap: 4.6.2_v43dgvb72xgm2jgaq7rwaicqhe
   bootstrap-icons: 1.11.3
+  holderjs: 2.9.9
   jquery: 3.7.1
   laravel-mix: 6.0.49_postcss@8.4.36
   lodash: 4.17.21
+  mockjs: 1.1.0
   normalize.css: 8.0.1
   popper.js: 1.16.1
   postcss: 8.4.36
@@ -3223,6 +3227,10 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: true
 
+  /holderjs/2.9.9:
+    resolution: {integrity: sha512-ceWPz1MrR3dxOoZXiom+G48+l1VPG3TcjBw9fq5iwCiZAMvYX8Aia13GOxT7DoV/AcSyTH7Vvr11ygjZP9qn4w==}
+    dev: true
+
   /hpack.js/2.1.6:
     resolution: {integrity: sha512-zJxVehUdMGIKsRaNt7apO2Gqp0BdqW5yaiGHXXmbpvxgBYVZnAql+BJb4RO5ad2MgpbZKn5G6nMnegrH1FcNYQ==}
     dependencies:
@@ -3879,6 +3887,13 @@ packages:
 
   /minimist/1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+    dev: true
+
+  /mockjs/1.1.0:
+    resolution: {integrity: sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ==}
+    hasBin: true
+    dependencies:
+      commander: 7.2.0
     dev: true
 
   /ms/2.0.0:

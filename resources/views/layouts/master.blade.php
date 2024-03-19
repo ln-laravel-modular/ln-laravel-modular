@@ -244,6 +244,10 @@
       ['jquery', 'jquery.min'],
       ['popper.js', 'popper.min'],
       ['bootstrap', 'js/bootstrap.min'],
+      ['lodash', 'lodash.min'],
+      ['holderjs', 'holder.min'],
+      ['mockjs', 'mockjs-min'],
+
   ]"></x-scripts>
 
   @stack('scripts')
