@@ -8,28 +8,37 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Config;
 use App\Support\Module;
+use Illuminate\Http\Request;
 
 class Controller extends \Illuminate\Routing\Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use \Illuminate\Foundation\Auth\Access\AuthorizesRequests,
+        \Illuminate\Foundation\Bus\DispatchesJobs,
+        \Illuminate\Foundation\Validation\ValidatesRequests,
+        \App\Traits\ActionSelectTrait;
 
     public function view($view = null, $data = [], $mergeData = [])
     {
         $return = array_merge([
+            '$route' => [
+                'method' => request()->method(),
+                'url' => request()->url(),
+                'fullUrl' => request()->fullUrl(),
+            ],
             'request' => request()->all(),
-            'config' => $config = Module::currentConfig()
+            'config' => $config = Module::currentConfig(),
         ], is_array($view) ? $view : [], $data);
 
         $return['view'] = is_array($view) ? $config['slug'] . '::' . $config['slug'] . '.' . $config['layout'] . '.' . $return['view'] : $view;
+
         if (env('WEB_CONSOLE')) {
             echo "<script>window.\$data=" . json_encode($return, JSON_UNESCAPED_UNICODE) . ";</script>";
-            echo "<script>console.log(`\$data`, window.\$data);</script>";
+            echo "<script>console.log(`window.\$data`, window.\$data);</script>";
         }
         if (is_array($view) ? !isset($view['view']) : empty($view)) abort(404);
 
         return view($return['view'], $return, $mergeData);
     }
-
     public function from_admin()
     {
         return preg_match('/^admin*/', request()->route()->getPrefix());
@@ -75,4 +84,33 @@ class Controller extends \Illuminate\Routing\Controller
         }
         return $return;
     }
+}
+
+
+trait ActionDeleteTrait
+{
+}
+trait ActionUpdateTrait
+{
+}
+trait ActionSelectTrait
+{
+}
+trait ActionUpsertTrait
+{
+}
+trait ActionImportTrait
+{
+}
+trait ActionExportTrait
+{
+}
+trait ActionIncreaseTrait
+{
+}
+trait ActionDecreaseTrait
+{
+}
+trait ActionReleaseTrait
+{
 }

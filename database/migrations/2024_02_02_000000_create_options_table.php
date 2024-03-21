@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Support\Module;
 
-class CreateLogsTable extends Migration
+class CreateOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +14,11 @@ class CreateLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('_logs', function (Blueprint $table) {
+        Schema::create('_options', function (Blueprint $table) {
             $table->id();
-
+            $table->string('user');
+            $table->string('name');
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_logs');
+        Schema::dropIfExists('_options');
     }
 }

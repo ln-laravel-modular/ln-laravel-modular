@@ -393,3 +393,17 @@ if (!function_exists('is_linux')) {
         return strpos(PHP_OS, 'Linux') !== false;
     }
 }
+
+
+if (!function_exists('decode')) {
+    // 解码
+    function decode($data, $option = [])
+    {
+    }
+}
+if (!function_exists('encode')) {
+    // 编码
+    function encode()
+    {
+    }
+}

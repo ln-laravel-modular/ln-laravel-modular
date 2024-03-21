@@ -39,6 +39,10 @@ mix.copy('node_modules/lodash/lodash.min.js', 'public/vendor/lodash/4.17.21/loda
 mix.copyDirectory('node_modules/markdown-it/dist', 'public/vendor/markdown-it/14.1.0');
 // "mockjs": "^1.1.0",
 mix.copyDirectory('node_modules/mockjs/dist', 'public/vendor/mockjs/1.1.0');
+// "moment": "^2.30.1",
+mix.copy('node_modules/moment/moment.js', 'public/vendor/moment/2.30.1/moment.js');
+mix.copyDirectory('node_modules/moment/min', 'public/vendor/moment/2.30.1');
+mix.copyDirectory('node_modules/moment/locale', 'public/vendor/moment/2.30.1/locale');
 // "normalize.css": "^8.0.1",
 mix.copy('node_modules/normalize.css/normalize.css', 'public/vendor/normalize.css/8.0.1/normalize.css');
 // "popper.js": "^1.16.1",

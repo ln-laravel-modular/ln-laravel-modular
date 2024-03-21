@@ -215,7 +215,8 @@
       ['bootstrap', 'js/bootstrap.min'],
       ['lodash', 'lodash.min'],
       ['holderjs', 'holder.min'],
-      ['mockjs', 'mockjs-min'],
+      ['mockjs', 'mock-min'],
+      ['moment', 'moment'],
 
   ]"></x-scripts>
 

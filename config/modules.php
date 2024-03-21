@@ -297,7 +297,7 @@ return [
             'other' => ['key', 'md5', 'uuid'],
         ],
         'key-map' => [
-            'prefix' => ['web.prefix', 'api.prefix', 'table.prefix'],
+            'prefix' => ['web.prefix', 'api.prefix', 'db.prefix', 'table.prefix'],
             'component' => ['web.component'],
             'layout' => ['web.layout'],
             'theme' => ['web.theme'],
