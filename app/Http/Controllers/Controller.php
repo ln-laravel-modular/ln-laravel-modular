@@ -32,8 +32,8 @@ class Controller extends \Illuminate\Routing\Controller
         $return['view'] = is_array($view) ? $config['slug'] . '::' . $config['slug'] . '.' . $config['layout'] . '.' . $return['view'] : $view;
 
         if (env('WEB_CONSOLE')) {
-            echo "<script>window.\$data=" . json_encode($return, JSON_UNESCAPED_UNICODE) . ";</script>";
-            echo "<script>console.log(`window.\$data`, window.\$data);</script>";
+            echo "<script>window.\$app=" . json_encode($return, JSON_UNESCAPED_UNICODE) . ";</script>";
+            echo "<script>console.log(`window.\$app`, window.\$app);</script>";
         }
         if (is_array($view) ? !isset($view['view']) : empty($view)) abort(404);
 

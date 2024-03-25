@@ -37,6 +37,8 @@ class Module extends \Nwidart\Modules\Facades\Module
     public static function currentConfig($key = null, $current = null, ...$extras)
     {
         $current = empty($current) ? Module::current() : $current;
+        // 未检测到模块名称，终止
+        if (empty($current)) return;
         $config = Config::get($current) ?? require base_path('modules' . DIRECTORY_SEPARATOR . $current . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php');
 
         // var_dump([$current, $config]);

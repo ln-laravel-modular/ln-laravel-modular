@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Support;
 
-use App\Support\Helpers\ModuleHelper;
+use App\Support\Module;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
 class Model extends \Illuminate\Database\Eloquent\Model
@@ -12,20 +12,26 @@ class Model extends \Illuminate\Database\Eloquent\Model
     use HasFactory, FamilyTree, TableRelationship;
 
     public $prefix;
+    //
     protected $dates = [
         'created_at',
         'updated_at',
         'release_at',
         'deleted_at'
     ];
+    //
     protected $fillable = [
         'created_at',
         'updated_at',
         'release_at',
         'deleted_at'
     ];
-
+    //
+    protected $cast = [];
+    //
     protected static $unguarded = false;
+
+    protected $primaryKeyPlural;
 
     public function __construct()
     {
@@ -33,7 +39,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     }
     public function setPrefix($prefix = null)
     {
-        $this->prefix = $prefix ?? Config::get(strtolower(ModuleHelper::current()) . '.db_prefix');
+        $this->prefix = $prefix ?? Config::get(strtolower(Module::current()) . '.db_prefix');
     }
     public function getPrefix()
     {
@@ -60,9 +66,54 @@ class Model extends \Illuminate\Database\Eloquent\Model
     {
         return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
     }
+
+    public function isFilledPrimaryKey()
+    {
+    }
 }
 
+trait PrimaryKeyPluralTrait
+{
+    // 主键的复数形式，一般用于批量操作
+    protected $primaryKeyPlural;
 
+    public function setPrimaryKeyPlural($primaryKeyPlural = null)
+    {
+        return $this->$primaryKeyPlural = empty($primaryKeyPlural)
+            ? Str::of($this->getKeyName())->plural()
+            : $primaryKeyPlural;
+    }
+    public function getPrimaryKeyPlural()
+    {
+        return $this->$primaryKeyPlural;
+    }
+}
+
+trait TableInsertTrait
+{
+    public static function InsertItem(Request $request)
+    {
+    }
+
+    public static function InsertList(Request $request)
+    {
+    }
+}
+trait TableSelectTrait
+{
+    public static function selectItem(Request $request)
+    {
+        return self::first();
+    }
+
+    public static function selectList(Request $request)
+    {
+    }
+
+    public static function selectPage(Request $request)
+    {
+    }
+}
 /**
  * 族谱
  */

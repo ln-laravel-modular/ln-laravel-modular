@@ -14,12 +14,15 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('_options', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->string('user');
             $table->string('name');
             $table->string('value');
+            $table->integer('user')->default(0);
+
             $table->timestamps();
+            $table->timestamp('release_at')->nullable()->comment('发布时间');
+            $table->timestamp('deleted_at')->nullable()->comment('删除时间');
         });
     }
 
@@ -30,6 +33,6 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_options');
+        Schema::dropIfExists('options');
     }
 }

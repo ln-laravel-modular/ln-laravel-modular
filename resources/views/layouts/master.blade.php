@@ -172,6 +172,8 @@
             </div>
           </div>
 
+          @yield('content')
+
           <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
             <div class="text-center text-sm text-gray-500 sm:text-left">
               <div class="flex items-center">
@@ -182,8 +184,8 @@
                   </path>
                 </svg>
 
-                <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                  Shop
+                <a href="/market" class="ml-1 underline">
+                  Market
                 </a>
 
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -217,7 +219,6 @@
       ['holderjs', 'holder.min'],
       ['mockjs', 'mock-min'],
       ['moment', 'moment'],
-
   ]"></x-scripts>
 
   @stack('scripts')

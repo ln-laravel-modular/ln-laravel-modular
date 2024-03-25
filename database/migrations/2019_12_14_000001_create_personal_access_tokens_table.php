@@ -21,6 +21,8 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();
             $table->timestamps();
+            $table->timestamp('release_at')->nullable()->comment('发布时间');
+            $table->timestamp('deleted_at')->nullable()->comment('删除时间');
         });
     }
 
